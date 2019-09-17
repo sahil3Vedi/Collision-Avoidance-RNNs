@@ -23,7 +23,7 @@ class subFrame():
     def __init__(self,subVal,subHeight):
         self.jump = 2
         self.obstacleFlag = 0
-        self.numObstacles = 2
+        self.numObstacles = 3
         self.obstacles = []
         self.subHeight = subHeight
         self.index = subVal
@@ -52,6 +52,8 @@ class subFrame():
                 tempO = obstacle(random.randint(1,10))
                 self.obstacles.append(tempO)
             self.posY = 0
+            
+        return self.obstacles
         
     def show(self):
         fill(self.index*100%255,self.index*100%255,self.index*100%255,122)
@@ -85,9 +87,12 @@ class viewFrame():
                 eachSubFrame.shift("moveDroneRight")
          
     def show(self):
+        vFrame_obstacles = []
         rectMode(CENTER)
         fill(self.bgcolor[0],self.bgcolor[1],self.bgcolor[2])
         rect(width/2, height/2, width,height)
         for each_subFrame in self.subFrames:
-            each_subFrame.update()
+            sFrame_obstacles = each_subFrame.update()
+            vFrame_obstacles.append(sFrame_obstacles)
             each_subFrame.show()
+        return vFrame_obstacles
